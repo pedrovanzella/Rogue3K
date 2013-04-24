@@ -1,6 +1,6 @@
 # SDL
 SDL_FLAGS=`sdl-config --cflags`
-SDL_LIBS=`sdl-config --libs`
+SDL_LIBS=`sdl-config --libs` -lSDL_ttf
 
 CXX = clang++
 OBJECTS = bin/main.o bin/application_main.o
