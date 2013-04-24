@@ -1,5 +1,5 @@
 CXX = clang++
-CXXFLAGS = -Wall
+CXXFLAGS = -Wall -std=c++11 -stdlib=libc++
 OBJECTS = bin/main.o
 BINARY = bin/Rogue3k
 
