@@ -14,7 +14,7 @@ class GameScreen
         void apply_surface(int, int, SDL_Surface*, SDL_Surface*);
 
     public:
-        void respondToUserInput(SDL_Event&);
+        GameScreen* respondToUserInput(SDL_Event&);
 
         void Init();
         int Update();

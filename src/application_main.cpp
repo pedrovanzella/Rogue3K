@@ -39,7 +39,9 @@ void ApplicationMain::mainLoop()
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 quit = true;
+                break;
             }
+            gameScreen = gameScreen->respondToUserInput(event);
         }
     }
 }

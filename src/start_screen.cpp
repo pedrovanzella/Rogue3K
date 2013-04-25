@@ -1,13 +1,14 @@
 #include <SDL/SDL.h>
 #include <iostream>
 #include "start_screen.h"
+#include "world_screen.h"
 
 StartScreen::StartScreen()
 {
     std::cout << "Initializing StartScreen" << std::endl;
 
     textColor = {0, 255, 0};
-    if ((message = TTF_RenderText_Solid(font, "Welcome to Rogue3k", textColor)) == NULL) {
+    if ((message = TTF_RenderText_Solid(font, "Welcome to Rogue3k.\nPress Enter to Play.", textColor)) == NULL) {
         std::cerr << "Can't open message buffer!" << std::endl;
     }
 
@@ -20,6 +21,14 @@ StartScreen::~StartScreen()
     SDL_FreeSurface(message);
 }
 
-void StartScreen::respondToUserInput(SDL_Event&)
+GameScreen* StartScreen::respondToUserInput(SDL_Event& event)
 {
+    if (event.type == SDL_KEYDOWN) {
+        std::cout << "Key pressed" << std::endl;
+        if (event.key.keysym.sym == SDLK_RETURN) {
+            std::cout << "RETURN pressed" << std::endl;
+            return new WorldScreen();
+        }
+    }
+    return this;
 }

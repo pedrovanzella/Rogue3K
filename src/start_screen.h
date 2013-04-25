@@ -12,7 +12,7 @@ class StartScreen: public GameScreen
         SDL_Color textColor;
 
     public:
-        void respondToUserInput(SDL_Event&);
+        GameScreen* respondToUserInput(SDL_Event&);
 
         StartScreen();
         ~StartScreen();

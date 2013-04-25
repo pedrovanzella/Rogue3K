@@ -22,8 +22,9 @@ void GameScreen::apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* d
     std::cout << "Surface applied" << std::endl;
 }
 
-void GameScreen::respondToUserInput(SDL_Event&)
+GameScreen* GameScreen::respondToUserInput(SDL_Event&)
 {
+    return this;
 }
 
 GameScreen::GameScreen()
