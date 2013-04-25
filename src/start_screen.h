@@ -8,15 +8,13 @@
 class StartScreen: public GameScreen
 {
     private:
-        SDL_Surface* screen;
         SDL_Surface* message;
         SDL_Color textColor;
 
     public:
         void respondToUserInput(SDL_Event&);
-        SDL_Surface* currentScreen();
 
-        StartScreen(SDL_Surface*);
+        StartScreen();
         ~StartScreen();
 };
 

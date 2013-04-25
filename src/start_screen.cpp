@@ -2,23 +2,16 @@
 #include <iostream>
 #include "start_screen.h"
 
-StartScreen::StartScreen(SDL_Surface* scr)
+StartScreen::StartScreen()
 {
-    std::cout << "Initializing game screen" << std::endl;
-    if (screen == NULL) {
-        std::cerr << "WTF null screen?" << std::endl;
-    }
-    setScreen(scr);
-
-    Init();
+    std::cout << "Initializing StartScreen" << std::endl;
 
     textColor = {0, 255, 0};
-    if ((message = TTF_RenderText_Solid(gameFont(), "Welcome to Rogue3k", textColor)) == NULL) {
+    if ((message = TTF_RenderText_Solid(font, "Welcome to Rogue3k", textColor)) == NULL) {
         std::cerr << "Can't open message buffer!" << std::endl;
     }
 
     apply_surface(50, 150, message, screen);
-    std::cout << "Surface applied" << std::endl;
 }
 
 StartScreen::~StartScreen()
@@ -29,10 +22,4 @@ StartScreen::~StartScreen()
 
 void StartScreen::respondToUserInput(SDL_Event&)
 {
-}
-
-SDL_Surface* StartScreen::currentScreen()
-{
-    std::cout << "Returning screen" << std::endl;
-    return screen;
 }

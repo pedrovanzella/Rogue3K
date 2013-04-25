@@ -6,19 +6,18 @@
 
 class GameScreen
 {
-    private:
+    protected:
         SDL_Surface* screen;
         TTF_Font* font;
         void InitFont();
 
+        void apply_surface(int, int, SDL_Surface*, SDL_Surface*);
+
     public:
         void respondToUserInput(SDL_Event&);
-        virtual SDL_Surface* currentScreen();
-        TTF_Font* gameFont();
-        void setScreen(SDL_Surface*);
 
-        void apply_surface(int, int, SDL_Surface*, SDL_Surface*);
         void Init();
+        int Update();
 
         GameScreen();
         ~GameScreen();

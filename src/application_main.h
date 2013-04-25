@@ -8,9 +8,8 @@
 class ApplicationMain
 {
     private:
-        SDL_Surface* screen;
         SDL_Event event;
-        GameScreen gameScreen;
+        GameScreen* gameScreen;
         bool quit;
 
 

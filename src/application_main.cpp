@@ -6,36 +6,28 @@
 ApplicationMain::ApplicationMain()
 {
     SDL_Init(SDL_INIT_EVERYTHING);
-    screen = NULL;
     quit = false;
 }
 
 ApplicationMain::~ApplicationMain()
 {
     std::cout << "Cleaning up..." << std::endl;
+    delete gameScreen;
     SDL_Quit();
 }
 
 int ApplicationMain::Init()
 {
-    if ((screen = SDL_SetVideoMode(800, 600, 32, SDL_SWSURFACE)) == NULL) {
-        std::cerr << "Can't create screen!" << std::endl;
-        return -1;
-    }
     SDL_WM_SetCaption("Rogue3k", NULL);
 
-    gameScreen = StartScreen(screen);
+    gameScreen = new StartScreen();
  
     return 1;
 }
 
 int ApplicationMain::Update()
 {
-    screen = gameScreen.currentScreen();
-    if (SDL_Flip(screen) == -1) {
-        return -1;
-    }
-    return 1;
+    return gameScreen->Update();
 }
 
 void ApplicationMain::mainLoop()

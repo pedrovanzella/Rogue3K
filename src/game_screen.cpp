@@ -19,16 +19,7 @@ void GameScreen::apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* d
         std::cerr << "NULL destination" << std::endl;
     }
     SDL_BlitSurface(source, NULL, destination, &offset);
-}
-
-SDL_Surface* GameScreen::currentScreen()
-{
-    return screen;
-}
-
-void GameScreen::setScreen(SDL_Surface* scr)
-{
-    screen = scr;
+    std::cout << "Surface applied" << std::endl;
 }
 
 void GameScreen::respondToUserInput(SDL_Event&)
@@ -37,6 +28,8 @@ void GameScreen::respondToUserInput(SDL_Event&)
 
 GameScreen::GameScreen()
 {
+    std::cout << "Initializing GameScreen" << std::endl;
+    Init();
 }
 
 GameScreen::~GameScreen()
@@ -48,6 +41,10 @@ GameScreen::~GameScreen()
 
 void GameScreen::Init()
 {
+    std::cout << "Creating SDL buffer" << std::endl;
+    if ((screen = SDL_SetVideoMode(800, 600, 32, SDL_SWSURFACE)) == NULL) {
+        std::cerr << "Can't create screen!" << std::endl;
+    }
     InitFont();
 }
 
@@ -60,7 +57,11 @@ void GameScreen::InitFont()
     }
 }
 
-TTF_Font* GameScreen::gameFont()
+int GameScreen::Update()
 {
-    return font;
+    //std::cout << "GameScreen::Update()" << std::endl;
+    if (SDL_Flip(screen) == -1) {
+        return -1;
+    }
+    return 1;
 }
