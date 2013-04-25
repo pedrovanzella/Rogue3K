@@ -19,24 +19,29 @@ ApplicationMain::~ApplicationMain()
 
 int ApplicationMain::Init()
 {
-    screen = SDL_SetVideoMode(800, 600, 32, SDL_SWSURFACE);
+    if ((screen = SDL_SetVideoMode(800, 600, 32, SDL_SWSURFACE)) == NULL) {
+        std::cerr << "Can't create screen!" << std::endl;
+        return -1;
+    }
     SDL_WM_SetCaption("Rogue3k", NULL);
 
+    TTF_Init();
     textColor = {0, 255, 0};
     if ((font = TTF_OpenFont("assets/VeraMono.ttf", 10)) == NULL) {
         std::cerr << "Can't open font!" << std::endl;
         return -1;
     }
-    message = TTF_RenderText_Solid(font, "Rogue3k", textColor);
 
-    apply_surface(0, 150, message, screen);
+    if ((message = TTF_RenderText_Solid(font, "Rogue3k", textColor)) == NULL) {
+        std::cerr << "Can't open message buffer!" << std::endl;
+        return -1;
+    }
+
+    apply_surface(50, 150, message, screen);
     update();
 
     SDL_Delay(2000);
     
-    if (screen == NULL || message == NULL) {
-        return -1;
-    }
     return 1;
 }
 
