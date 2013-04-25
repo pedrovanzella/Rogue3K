@@ -4,7 +4,9 @@ int main(int argc, char* argv[])
 {
     ApplicationMain app;
 
-    app.Init();
+    if (!app.Init()) {
+        return -1;
+    }
 
     app.mainLoop();
 
