@@ -44,7 +44,7 @@ int ApplicationMain::Init()
     return 1;
 }
 
-int ApplicationMain::update()
+int ApplicationMain::Update()
 {
     if (SDL_Flip(screen) == -1) {
         return -1;
@@ -69,7 +69,7 @@ void ApplicationMain::mainLoop()
 {
     while (!quit) {
         // Update our screen
-        update();
+        Update();
 
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {

@@ -17,7 +17,7 @@ class ApplicationMain
         ApplicationMain();
 
         int Init();
-        int update();
+        int Update();
         void mainLoop();
 
         ~ApplicationMain();
