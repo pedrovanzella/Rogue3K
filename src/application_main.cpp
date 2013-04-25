@@ -7,10 +7,12 @@ ApplicationMain::ApplicationMain()
     screen = NULL;
     message = NULL;
     font = NULL;
+    quit = false;
 }
 
 ApplicationMain::~ApplicationMain()
 {
+    std::cout << "Cleaning up..." << std::endl;
     SDL_FreeSurface(message);
     TTF_CloseFont(font);
     TTF_Quit();
@@ -38,10 +40,7 @@ int ApplicationMain::Init()
     }
 
     apply_surface(50, 150, message, screen);
-    update();
 
-    SDL_Delay(2000);
-    
     return 1;
 }
 
@@ -64,4 +63,18 @@ void ApplicationMain::apply_surface(int x, int y, SDL_Surface* source, SDL_Surfa
     
     //Blit the surface
     SDL_BlitSurface( source, NULL, destination, &offset );
+}
+
+void ApplicationMain::mainLoop()
+{
+    while (!quit) {
+        // Update our screen
+        update();
+
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                quit = true;
+            }
+        }
+    }
 }

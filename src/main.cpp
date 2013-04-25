@@ -6,5 +6,7 @@ int main(int argc, char* argv[])
 
     app.Init();
 
+    app.mainLoop();
+
     return 0;
 }

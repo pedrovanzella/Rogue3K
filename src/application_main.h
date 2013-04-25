@@ -8,13 +8,17 @@ class ApplicationMain
         SDL_Surface* message;
         TTF_Font* font;
         SDL_Color textColor;
+        SDL_Event event;
+        bool quit;
+
+        void apply_surface(int, int, SDL_Surface*, SDL_Surface*);
 
     public:
         ApplicationMain();
 
         int Init();
         int update();
-        void apply_surface(int, int, SDL_Surface*, SDL_Surface*);
+        void mainLoop();
 
         ~ApplicationMain();
 };
