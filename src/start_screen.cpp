@@ -8,11 +8,17 @@ StartScreen::StartScreen()
     std::cout << "Initializing StartScreen" << std::endl;
 
     textColor = {0, 255, 0};
-    if ((message = TTF_RenderText_Solid(font, "Welcome to Rogue3k.\nPress Enter to Play.", textColor)) == NULL) {
+    if ((message = TTF_RenderText_Solid(font, "Welcome to Rogue3k.", textColor)) == NULL) {
         std::cerr << "Can't open message buffer!" << std::endl;
     }
 
     apply_surface(50, 150, message, screen);
+
+    if ((message = TTF_RenderText_Solid(font, "Press [Enter] to Play.", textColor)) == NULL) {
+        std::cerr << "Can't open message buffer!" << std::endl;
+    }
+
+    apply_surface(50, 250, message, screen);
 }
 
 StartScreen::~StartScreen()
