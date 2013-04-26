@@ -13,12 +13,13 @@ WinScreen::WinScreen()
     }
 
     apply_surface(50, 150, message, screen);
+
+    SDL_FreeSurface(message);
 }
 
 WinScreen::~WinScreen()
 {
     std::cout << "Cleaning up WinScreen" << std::endl;
-    SDL_FreeSurface(message);
 }
 
 GameScreen* WinScreen::respondToUserInput(SDL_Event& event)

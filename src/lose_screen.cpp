@@ -13,12 +13,13 @@ LoseScreen::LoseScreen()
     }
 
     apply_surface(50, 150, message, screen);
+
+    SDL_FreeSurface(message);
 }
 
 LoseScreen::~LoseScreen()
 {
     std::cout << "Cleaning up LoseScreen" << std::endl;
-    SDL_FreeSurface(message);
 }
 
 GameScreen* LoseScreen::respondToUserInput(SDL_Event& event)

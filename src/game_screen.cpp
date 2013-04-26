@@ -28,6 +28,7 @@ GameScreen::GameScreen()
 GameScreen::~GameScreen()
 {
     std::cout << "Cleaning up GameScreen" << std::endl;
+    SDL_FreeSurface(screen);
     TTF_CloseFont(font);
     TTF_Quit();
 }

@@ -15,23 +15,28 @@ WorldScreen::WorldScreen()
 
     apply_surface(50, 150, message, screen);
 
+    SDL_FreeSurface(message);
+
     if ((message = TTF_RenderText_Solid(font, "Press [Escape] do Die.", textColor)) == NULL) {
         std::cerr << "Can't open message buffer!" << std::endl;
     }
 
     apply_surface(50, 200, message, screen);
 
+    SDL_FreeSurface(message);
+
     if ((message = TTF_RenderText_Solid(font, "Press [Enter] to Win.", textColor)) == NULL) {
         std::cerr << "Can't open message buffer!" << std::endl;
     }
 
     apply_surface(50, 250, message, screen);
+
+    SDL_FreeSurface(message);
 }
 
 WorldScreen::~WorldScreen()
 {
     std::cout << "Cleaning up WorldScreen" << std::endl;
-    SDL_FreeSurface(message);
 }
 
 GameScreen* WorldScreen::respondToUserInput(SDL_Event& event)

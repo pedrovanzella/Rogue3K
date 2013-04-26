@@ -41,7 +41,11 @@ void ApplicationMain::mainLoop()
                 quit = true;
                 break;
             }
+            GameScreen* oldgameScreen = gameScreen;
             gameScreen = gameScreen->respondToUserInput(event);
+            if (oldgameScreen != gameScreen) {
+                delete oldgameScreen;
+            }
         }
     }
 }
