@@ -1,12 +1,14 @@
 #include <SDL/SDL.h>
 #include <iostream>
 #include "world_screen.h"
+#include "win_screen.h"
+#include "lose_screen.h"
 
 WorldScreen::WorldScreen()
 {
     std::cout << "Initializing WorldScreen" << std::endl;
 
-    textColor = {255, 0, 0};
+    textColor = {255, 255, 0};
     if ((message = TTF_RenderText_Solid(font, "This is the world of Rogue3k.\nPress Escape do Die.\nPress Enter to Win.", textColor)) == NULL) {
         std::cerr << "Can't open message buffer!" << std::endl;
     }
@@ -28,12 +30,10 @@ GameScreen* WorldScreen::respondToUserInput(SDL_Event& event)
         switch (event.key.keysym.sym) {
             case SDLK_RETURN:
                 std::cout << "RETURN pressed" << std::endl;
-                // return new WinScreen();
-                return new WorldScreen();
+                return new WinScreen();
             case SDLK_ESCAPE:
                 std::cout << "ESCAPE pressed" << std::endl;
-                // return new LoseScreen();
-                return new WorldScreen();
+                return new LoseScreen();
             default:
                 return this;
         }
