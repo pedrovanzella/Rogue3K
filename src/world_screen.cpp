@@ -22,4 +22,22 @@ WorldScreen::~WorldScreen()
 
 GameScreen* WorldScreen::respondToUserInput(SDL_Event& event)
 {
+    std::cout << "WorldScreen responding" << std::endl;
+    if (event.type == SDL_KEYDOWN) {
+        std::cout << "Key pressed" << std::endl;
+        switch (event.key.keysym.sym) {
+            case SDLK_RETURN:
+                std::cout << "RETURN pressed" << std::endl;
+                // return new WinScreen();
+                return new WorldScreen();
+            case SDLK_ESCAPE:
+                std::cout << "ESCAPE pressed" << std::endl;
+                // return new LoseScreen();
+                return new WorldScreen();
+            default:
+                return this;
+        }
+    }
+    return this;
+
 }

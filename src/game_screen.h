@@ -14,13 +14,13 @@ class GameScreen
         void apply_surface(int, int, SDL_Surface*, SDL_Surface*);
 
     public:
-        GameScreen* respondToUserInput(SDL_Event&);
+        virtual GameScreen* respondToUserInput(SDL_Event&);
 
         void Init();
         int Update();
 
         GameScreen();
-        ~GameScreen();
+        virtual ~GameScreen();
 };
 
 #endif /* _GAME_SCREEN_H_ */

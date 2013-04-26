@@ -23,6 +23,7 @@ StartScreen::~StartScreen()
 
 GameScreen* StartScreen::respondToUserInput(SDL_Event& event)
 {
+    std::cout << "StartScreen responding" << std::endl;
     if (event.type == SDL_KEYDOWN) {
         std::cout << "Key pressed" << std::endl;
         if (event.key.keysym.sym == SDLK_RETURN) {
