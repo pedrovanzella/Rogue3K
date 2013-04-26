@@ -23,12 +23,12 @@ StartScreen::~StartScreen()
 
 GameScreen* StartScreen::respondToUserInput(SDL_Event& event)
 {
-    std::cout << "StartScreen responding" << std::endl;
     if (event.type == SDL_KEYDOWN) {
-        std::cout << "Key pressed" << std::endl;
-        if (event.key.keysym.sym == SDLK_RETURN) {
-            std::cout << "RETURN pressed" << std::endl;
-            return new WorldScreen();
+        switch (event.key.keysym.sym) {
+            case SDLK_RETURN:
+                return new WorldScreen();
+            default:
+                return this;
         }
     }
     return this;

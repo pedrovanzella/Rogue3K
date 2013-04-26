@@ -3,7 +3,6 @@
 
 void GameScreen::apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* destination)
 {
-    std::cout << "Applying surface" << std::endl;
     //Make a temporary rectangle to hold the offsets
     SDL_Rect offset;
     
@@ -12,19 +11,11 @@ void GameScreen::apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* d
     offset.y = y;
     
     //Blit the surface
-    if (source == NULL) {
-        std::cerr << "NULL Source" << std::endl;
-    }
-    if (destination == NULL) {
-        std::cerr << "NULL destination" << std::endl;
-    }
     SDL_BlitSurface(source, NULL, destination, &offset);
-    std::cout << "Surface applied" << std::endl;
 }
 
 GameScreen* GameScreen::respondToUserInput(SDL_Event&)
 {
-    std::cout << "GameScreen responding" << std::endl;
     return this;
 }
 
@@ -61,7 +52,6 @@ void GameScreen::InitFont()
 
 int GameScreen::Update()
 {
-    //std::cout << "GameScreen::Update()" << std::endl;
     if (SDL_Flip(screen) == -1) {
         return -1;
     }

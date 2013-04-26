@@ -23,12 +23,9 @@ WinScreen::~WinScreen()
 
 GameScreen* WinScreen::respondToUserInput(SDL_Event& event)
 {
-    std::cout << "WinScreen responding" << std::endl;
     if (event.type == SDL_KEYDOWN) {
-        std::cout << "Key pressed" << std::endl;
         switch (event.key.keysym.sym) {
             case SDLK_RETURN:
-                std::cout << "RETURN pressed" << std::endl;
                 return new WorldScreen();
             default:
                 return this;
