@@ -9,8 +9,8 @@
 class Tile
 {
     private:
-        char glyph;
-        SDL_Color color;
+        char glph;
+        SDL_Color clr;
 
     public:
 
@@ -19,6 +19,9 @@ class Tile
         static Tile* Floor();
         static Tile* Wall();
         static Tile* Bounds();
+
+        char glyph();
+        SDL_Color color();
 };
 
 #endif /* _TILE_H_ */

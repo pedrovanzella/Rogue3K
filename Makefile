@@ -3,7 +3,7 @@ SDL_FLAGS=`sdl-config --cflags`
 SDL_LIBS=`sdl-config --libs` -lSDL_ttf
 
 CXX = clang++
-OBJECTS = bin/main.o bin/application_main.o bin/start_screen.o bin/game_screen.o bin/world_screen.o bin/win_screen.o bin/lose_screen.o bin/tile.o
+OBJECTS = bin/main.o bin/application_main.o bin/start_screen.o bin/game_screen.o bin/world_screen.o bin/win_screen.o bin/lose_screen.o bin/tile.o bin/world.o
 BINARY = bin/Rogue3k
 CXXFLAGS = -Wall -std=c++11 -stdlib=libc++ $(SDL_FLAGS)
 LDFLAGS = $(SDL_LIBS)
@@ -39,6 +39,9 @@ bin/lose_screen.o: src/lose_screen.h src/lose_screen.cpp
 
 bin/tile.o: src/tile.h src/tile.cpp
 	$(CXX) $(CXXFLAGS) src/tile.cpp -o bin/tile.o -c
+
+bin/world.o: src/world.h src/world.cpp
+	$(CXX) $(CXXFLAGS) src/world.cpp -o bin/world.o -c
 
 clean:
 	rm -rf bin/*

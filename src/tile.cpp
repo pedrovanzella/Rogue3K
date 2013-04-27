@@ -2,8 +2,8 @@
 
 Tile::Tile(char g, SDL_Color c)
 {
-    glyph = g;
-    color = c;
+    glph = g;
+    clr = c;
 }
 
 Tile* Tile::Floor()
@@ -19,4 +19,14 @@ Tile* Tile::Wall()
 Tile* Tile::Bounds()
 {
     return new Tile('x', BOUNDS_COLOR);
+}
+
+char Tile::glyph()
+{
+    return glph;
+}
+
+SDL_Color Tile::color()
+{
+    return clr;
 }
