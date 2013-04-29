@@ -22,19 +22,23 @@ WorldBuilder* WorldBuilder::randomizeTiles()
 {
     std::cout << "Randomizing Tiles" << std::endl;
     for (int x = 0; x <= width; x++) {
+        vector<Tile *> ys;
         for (int y = 0; y <= height; y++) {
             std::default_random_engine generator;
             std::uniform_int_distribution<int> distribution(0,1);
             std::cout << "Tile [" << x << "][" << y << "] is ";
             switch (distribution(generator)) {
                 case 0:
-                    tiles[x][y] = Tile::Floor();
+                    ys.push_back(Tile::Floor());
                     std::cout << "Floor" << std::endl;
+                    break;
                 case 1:
-                    tiles[x][y] = Tile::Wall();
+                    ys.push_back(Tile::Wall());
                     std::cout << "Wall" << std::endl;
+                    break;
             }
         }
+        tiles.push_back(ys);
     }
     return this;
 }
