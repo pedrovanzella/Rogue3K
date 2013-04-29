@@ -24,10 +24,11 @@ WorldBuilder* WorldBuilder::randomizeTiles()
     for (int x = 0; x <= width; x++) {
         vector<Tile *> ys;
         for (int y = 0; y <= height; y++) {
-            std::default_random_engine generator;
             std::uniform_int_distribution<int> distribution(0,1);
             std::cout << "Tile [" << x << "][" << y << "] is ";
-            switch (distribution(generator)) {
+            int g = distribution(generator);
+            std::cout << "[" << g << "] ";
+            switch (g) {
                 case 0:
                     ys.push_back(Tile::Floor());
                     std::cout << "Floor" << std::endl;
