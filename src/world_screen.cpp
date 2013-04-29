@@ -17,7 +17,7 @@ WorldScreen::WorldScreen()
         std::cerr << "Can't open message buffer!" << std::endl;
     }
 
-    apply_surface(50, 150, message, screen);
+    apply_surface(50, 550, message, screen);
 
     SDL_FreeSurface(message);
 
@@ -25,7 +25,7 @@ WorldScreen::WorldScreen()
         std::cerr << "Can't open message buffer!" << std::endl;
     }
 
-    apply_surface(50, 200, message, screen);
+    apply_surface(50, 565, message, screen);
 
     SDL_FreeSurface(message);
 
@@ -33,7 +33,7 @@ WorldScreen::WorldScreen()
         std::cerr << "Can't open message buffer!" << std::endl;
     }
 
-    apply_surface(50, 250, message, screen);
+    apply_surface(50, 580, message, screen);
 
     SDL_FreeSurface(message);
 

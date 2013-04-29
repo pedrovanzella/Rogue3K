@@ -25,17 +25,17 @@ WorldBuilder* WorldBuilder::randomizeTiles()
         vector<Tile *> ys;
         for (int y = 0; y <= height; y++) {
             std::uniform_int_distribution<int> distribution(0,1);
-            std::cout << "Tile [" << x << "][" << y << "] is ";
+            //std::cout << "Tile [" << x << "][" << y << "] is ";
             int g = distribution(generator);
-            std::cout << "[" << g << "] ";
+            //std::cout << "[" << g << "] ";
             switch (g) {
                 case 0:
                     ys.push_back(Tile::Floor());
-                    std::cout << "Floor" << std::endl;
+                    //std::cout << "Floor" << std::endl;
                     break;
                 case 1:
                     ys.push_back(Tile::Wall());
-                    std::cout << "Wall" << std::endl;
+                    //std::cout << "Wall" << std::endl;
                     break;
             }
         }
