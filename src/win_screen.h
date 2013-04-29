@@ -11,7 +11,6 @@ class WinScreen: public GameScreen
     private:
         SDL_Surface* message;
         SDL_Color textColor;
-        static World* world;
 
     public:
         GameScreen* respondToUserInput(SDL_Event&);

@@ -3,6 +3,10 @@
 #include "world_screen.h"
 #include "win_screen.h"
 #include "lose_screen.h"
+#include "world_builder.h"
+#include "world.h"
+
+World* WorldScreen::world = NULL;
 
 WorldScreen::WorldScreen()
 {
@@ -32,6 +36,13 @@ WorldScreen::WorldScreen()
     apply_surface(50, 250, message, screen);
 
     SDL_FreeSurface(message);
+
+    if (!WorldScreen::world) {
+        std::cout << "Creating a world" << std::endl;
+        createWorld();
+    } else {
+        std::cout << "World already exists." << std::endl;
+    }
 }
 
 WorldScreen::~WorldScreen()
@@ -53,4 +64,12 @@ GameScreen* WorldScreen::respondToUserInput(SDL_Event& event)
     }
     return this;
 
+}
+
+void WorldScreen::createWorld()
+{
+    WorldBuilder* worldbuilder = new WorldBuilder(90, 31);
+    worldbuilder = worldbuilder->makeCaves();
+    WorldScreen::world = worldbuilder->build();
+    delete worldbuilder;
 }
