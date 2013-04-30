@@ -17,7 +17,7 @@ class GameScreen
         virtual GameScreen* respondToUserInput(SDL_Event&);
 
         void Init();
-        int Update();
+        virtual int Update();
 
         GameScreen();
         virtual ~GameScreen();

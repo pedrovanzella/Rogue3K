@@ -27,3 +27,7 @@ SDL_Color World::color(int x, int y)
 {
     return tile(x, y)->color();
 }
+
+void World::Draw(SDL_Surface* screen, int x, int y)
+{
+}

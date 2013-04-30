@@ -17,6 +17,7 @@ class WorldScreen: public GameScreen
         void createWorld();
     public:
         GameScreen* respondToUserInput(SDL_Event&);
+        int Update();
 
         WorldScreen();
         ~WorldScreen();

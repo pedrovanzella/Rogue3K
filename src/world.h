@@ -16,6 +16,8 @@ class World
         Tile* tile(int, int);
         char glyph(int, int);
         SDL_Color color(int, int);
+
+        void Draw(SDL_Surface*, int, int);
 };
 
 #endif /* _WORLD_H_ */

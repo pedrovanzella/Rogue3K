@@ -35,3 +35,7 @@ SDL_Color Tile::color()
 {
     return clr;
 }
+
+void Tile::Draw(SDL_Surface* screen, int x, int y)
+{
+}

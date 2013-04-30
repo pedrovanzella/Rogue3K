@@ -22,6 +22,8 @@ class Tile
 
         char glyph();
         SDL_Color color();
+
+        void Draw(SDL_Surface*, int, int);
 };
 
 #endif /* _TILE_H_ */

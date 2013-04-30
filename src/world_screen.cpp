@@ -50,6 +50,11 @@ WorldScreen::~WorldScreen()
     std::cout << "Cleaning up WorldScreen" << std::endl;
 }
 
+int WorldScreen::Update()
+{
+    return GameScreen::Update();
+}
+
 GameScreen* WorldScreen::respondToUserInput(SDL_Event& event)
 {
     if (event.type == SDL_KEYDOWN) {
