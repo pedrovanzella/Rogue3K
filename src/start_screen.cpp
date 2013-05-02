@@ -2,27 +2,13 @@
 #include <iostream>
 #include "start_screen.h"
 #include "world_screen.h"
+#include "renderer.h"
 
 StartScreen::StartScreen()
 {
     std::cout << "Initializing StartScreen" << std::endl;
-
-    textColor = {0, 255, 0};
-    if ((message = TTF_RenderText_Solid(font, "Welcome to Rogue3k.", textColor)) == NULL) {
-        std::cerr << "Can't open message buffer!" << std::endl;
-    }
-
-    apply_surface(50, 150, message, screen);
-
-    SDL_FreeSurface(message);
-
-    if ((message = TTF_RenderText_Solid(font, "Press [Enter] to Play.", textColor)) == NULL) {
-        std::cerr << "Can't open message buffer!" << std::endl;
-    }
-
-    apply_surface(50, 250, message, screen);
-
-    SDL_FreeSurface(message);
+    Renderer::write_message_to_screen(0, 255, 0, "Welcome to Rogue3k.", 50, 150);
+    Renderer::write_message_to_screen(0, 255, 0, "Press [Enter] to Play.", 50, 250);
 }
 
 StartScreen::~StartScreen()

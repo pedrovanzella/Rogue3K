@@ -5,13 +5,10 @@
 #include <SDL/SDL_ttf.h>
 #include "game_screen.h"
 #include "world.h"
+#include "renderer.h"
 
 class WinScreen: public GameScreen
 {
-    private:
-        SDL_Surface* message;
-        SDL_Color textColor;
-
     public:
         GameScreen* respondToUserInput(SDL_Event&);
 

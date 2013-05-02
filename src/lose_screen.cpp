@@ -2,19 +2,13 @@
 #include <iostream>
 #include "world_screen.h"
 #include "lose_screen.h"
+#include "renderer.h"
 
 LoseScreen::LoseScreen()
 {
     std::cout << "Initializing LoseScreen" << std::endl;
 
-    textColor = {255, 0, 0};
-    if ((message = TTF_RenderText_Solid(font, "You Lose! Press [Enter] to play again.", textColor)) == NULL) {
-        std::cerr << "Can't open message buffer!" << std::endl;
-    }
-
-    apply_surface(50, 150, message, screen);
-
-    SDL_FreeSurface(message);
+    Renderer::write_message_to_screen(255, 0, 0, "You Lose! Press [Enter] to play again.", 50, 150);
 }
 
 LoseScreen::~LoseScreen()

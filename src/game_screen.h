@@ -3,20 +3,13 @@
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
+#include "renderer.h"
 
 class GameScreen
 {
-    protected:
-        SDL_Surface* screen;
-        TTF_Font* font;
-        void InitFont();
-
-        void apply_surface(int, int, SDL_Surface*, SDL_Surface*);
-
     public:
         virtual GameScreen* respondToUserInput(SDL_Event&);
 
-        void Init();
         virtual int Update();
 
         GameScreen();

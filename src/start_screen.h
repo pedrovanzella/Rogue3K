@@ -4,13 +4,10 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
 #include "game_screen.h"
+#include "renderer.h"
 
 class StartScreen: public GameScreen
 {
-    private:
-        SDL_Surface* message;
-        SDL_Color textColor;
-
     public:
         GameScreen* respondToUserInput(SDL_Event&);
 

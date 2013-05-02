@@ -6,12 +6,11 @@
 #include "game_screen.h"
 #include "world.h"
 #include "world_builder.h"
+#include "renderer.h"
 
 class WorldScreen: public GameScreen
 {
     private:
-        SDL_Surface* message;
-        SDL_Color textColor;
         static World* world;
 
         void createWorld();

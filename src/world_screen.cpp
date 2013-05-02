@@ -12,30 +12,9 @@ WorldScreen::WorldScreen()
 {
     std::cout << "Initializing WorldScreen" << std::endl;
 
-    textColor = {255, 255, 0};
-    if ((message = TTF_RenderText_Solid(font, "This is the world of Rogue3k.", textColor)) == NULL) {
-        std::cerr << "Can't open message buffer!" << std::endl;
-    }
-
-    apply_surface(50, 550, message, screen);
-
-    SDL_FreeSurface(message);
-
-    if ((message = TTF_RenderText_Solid(font, "Press [Escape] do Die.", textColor)) == NULL) {
-        std::cerr << "Can't open message buffer!" << std::endl;
-    }
-
-    apply_surface(50, 565, message, screen);
-
-    SDL_FreeSurface(message);
-
-    if ((message = TTF_RenderText_Solid(font, "Press [Enter] to Win.", textColor)) == NULL) {
-        std::cerr << "Can't open message buffer!" << std::endl;
-    }
-
-    apply_surface(50, 580, message, screen);
-
-    SDL_FreeSurface(message);
+    Renderer::write_message_to_screen(255, 255, 0, "This is the world of Rogue3k.", 50, 550);
+    Renderer::write_message_to_screen(255, 255, 0, "Press [Escape to Die.", 50, 565);
+    Renderer::write_message_to_screen(255, 255, 0, "Press [Enter] to Win.", 50, 580);
 
     if (!WorldScreen::world) {
         std::cout << "Creating a world" << std::endl;

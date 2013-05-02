@@ -5,7 +5,6 @@
 
 ApplicationMain::ApplicationMain()
 {
-    SDL_Init(SDL_INIT_EVERYTHING);
     quit = false;
 }
 
@@ -13,12 +12,12 @@ ApplicationMain::~ApplicationMain()
 {
     std::cout << "Cleaning up..." << std::endl;
     delete gameScreen;
-    SDL_Quit();
 }
 
 int ApplicationMain::Init()
 {
-    SDL_WM_SetCaption("Rogue3k", NULL);
+    Renderer::Init();
+    Renderer::set_window_title("Rogue3k");
 
     gameScreen = new StartScreen();
  
