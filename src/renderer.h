@@ -17,6 +17,7 @@ class Renderer
         static void CloseRenderer();
         static void write_message_to_screen(int, int, int, std::string, int, int);
         static void set_window_title(std::string);
+        static void clear_area(int, int, int, int);
 };
 
 #endif /* _RENDERER_H_ */

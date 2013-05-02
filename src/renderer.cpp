@@ -57,5 +57,16 @@ void Renderer::write_message_to_screen(int r, int g, int b, std::string msg, int
 
 void Renderer::set_window_title(std::string title)
 {
-    SDL_WM_SetCaption("Rogue3k", NULL);
+    SDL_WM_SetCaption(title.c_str(), NULL);
+}
+
+void Renderer::clear_area(int x, int y, int w, int h)
+{
+    SDL_Rect area;
+    area.x = x;
+    area.y = y;
+    area.w = w;
+    area.h = h;
+
+    SDL_FillRect(screen, &area, 0x000000);
 }

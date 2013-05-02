@@ -7,6 +7,7 @@
 StartScreen::StartScreen()
 {
     std::cout << "Initializing StartScreen" << std::endl;
+    Renderer::clear_area(0, 0, 800, 600);
     Renderer::write_message_to_screen(0, 255, 0, "Welcome to Rogue3k.", 50, 150);
     Renderer::write_message_to_screen(0, 255, 0, "Press [Enter] to Play.", 50, 250);
 }

@@ -7,7 +7,7 @@
 LoseScreen::LoseScreen()
 {
     std::cout << "Initializing LoseScreen" << std::endl;
-
+    Renderer::clear_area(0, 0, 800, 600);
     Renderer::write_message_to_screen(255, 0, 0, "You Lose! Press [Enter] to play again.", 50, 150);
 }
 

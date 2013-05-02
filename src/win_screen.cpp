@@ -7,6 +7,7 @@
 WinScreen::WinScreen()
 {
     std::cout << "Initializing WinScreen" << std::endl;
+    Renderer::clear_area(0, 0, 800, 600);
     Renderer::write_message_to_screen(0, 0, 255, "Great job. Press [Enter] to play again.", 50, 150);
 }
 

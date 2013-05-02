@@ -12,8 +12,9 @@ WorldScreen::WorldScreen()
 {
     std::cout << "Initializing WorldScreen" << std::endl;
 
+    Renderer::clear_area(0, 0, 800, 600);
     Renderer::write_message_to_screen(255, 255, 0, "This is the world of Rogue3k.", 50, 550);
-    Renderer::write_message_to_screen(255, 255, 0, "Press [Escape to Die.", 50, 565);
+    Renderer::write_message_to_screen(255, 255, 0, "Press [Escape] to Die.", 50, 565);
     Renderer::write_message_to_screen(255, 255, 0, "Press [Enter] to Win.", 50, 580);
 
     if (!WorldScreen::world) {
