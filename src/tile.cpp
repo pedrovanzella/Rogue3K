@@ -15,7 +15,7 @@ Tile::Tile(char g, SDL_Color c)
 Tile* Tile::Floor()
 {
     SDL_Color c = FLOOR_COLOR;
-    return new Tile('.', c);
+    return new Tile('*', c);
 }
 
 Tile* Tile::Wall()

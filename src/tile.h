@@ -3,8 +3,8 @@
 #include <SDL/SDL.h>
 #include "renderer.h"
 
-#define FLOOR_COLOR {140, 140, 120}
-#define WALL_COLOR {100, 230, 200}
+#define FLOOR_COLOR {0, 140, 120}
+#define WALL_COLOR {255, 255, 0}
 #define BOUNDS_COLOR {250, 50, 0}
 
 class Tile
