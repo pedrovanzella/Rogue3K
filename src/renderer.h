@@ -9,9 +9,9 @@ class Renderer
     private:
         static SDL_Surface* screen;
         static TTF_Font* font;
+        static void apply_surface(int, int, SDL_Surface*, SDL_Surface*);
 
     public:
-        static void apply_surface(int, int, SDL_Surface*, SDL_Surface*);
         static void Init();
         static int Update();
         static void CloseRenderer();

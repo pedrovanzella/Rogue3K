@@ -32,6 +32,7 @@ WorldScreen::~WorldScreen()
 
 int WorldScreen::Update()
 {
+    world->Draw(25, 25);
     return GameScreen::Update();
 }
 

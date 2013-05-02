@@ -1,6 +1,7 @@
 #ifndef _TILE_H_
 #define _TILE_H_
 #include <SDL/SDL.h>
+#include "renderer.h"
 
 #define FLOOR_COLOR {140, 140, 120}
 #define WALL_COLOR {100, 230, 200}
@@ -13,6 +14,7 @@ class Tile
         SDL_Color clr;
 
     public:
+        static const int TILE_SIZE;
 
         Tile(char, SDL_Color);
         
@@ -23,7 +25,7 @@ class Tile
         char glyph();
         SDL_Color color();
 
-        void Draw(SDL_Surface*, int, int);
+        void Draw(int, int);
 };
 
 #endif /* _TILE_H_ */

@@ -1,6 +1,10 @@
 #include <iostream>
 #include <SDL/SDL.h>
+#include <string>
 #include "tile.h"
+#include "renderer.h"
+
+const int Tile::TILE_SIZE = 8;
 
 Tile::Tile(char g, SDL_Color c)
 {
@@ -36,6 +40,9 @@ SDL_Color Tile::color()
     return clr;
 }
 
-void Tile::Draw(SDL_Surface* screen, int x, int y)
+void Tile::Draw(int x, int y)
 {
+    std::string s;
+    s[0] = glph;
+    Renderer::write_message_to_screen(clr.r, clr.g, clr.b, s.c_str(), x, y);
 }

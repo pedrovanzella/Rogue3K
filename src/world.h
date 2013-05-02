@@ -17,7 +17,8 @@ class World
         char glyph(int, int);
         SDL_Color color(int, int);
 
-        void Draw(SDL_Surface*, int, int);
+        // Top left coordinates
+        void Draw(int, int);
 };
 
 #endif /* _WORLD_H_ */
