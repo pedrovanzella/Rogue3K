@@ -30,16 +30,6 @@ Tile* Tile::Bounds()
     return new Tile('x', c);
 }
 
-char Tile::glyph()
-{
-    return glph;
-}
-
-SDL_Color Tile::color()
-{
-    return clr;
-}
-
 void Tile::Draw(int x, int y)
 {
     std::string s;

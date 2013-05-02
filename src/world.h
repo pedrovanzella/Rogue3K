@@ -14,8 +14,6 @@ class World
     public:
         World(std::vector<std::vector<Tile*>>);
         Tile* tile(int, int);
-        char glyph(int, int);
-        SDL_Color color(int, int);
 
         // Top left coordinates
         void Draw(int, int);

@@ -22,9 +22,6 @@ class Tile
         static Tile* Wall();
         static Tile* Bounds();
 
-        char glyph();
-        SDL_Color color();
-
         void Draw(int, int);
 };
 

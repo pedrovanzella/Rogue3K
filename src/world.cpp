@@ -18,16 +18,6 @@ Tile* World::tile(int x, int y)
         return tiles[x][y];
 }
 
-char World::glyph(int x, int y)
-{
-    return tile(x, y)->glyph();
-}
-
-SDL_Color World::color(int x, int y)
-{
-    return tile(x, y)->color();
-}
-
 void World::Draw(int x, int y)
 {
     for (int i = 0; i < tiles.size(); i++) {
