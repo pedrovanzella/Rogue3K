@@ -25,7 +25,6 @@ WorldBuilder* WorldBuilder::randomizeTiles()
         vector<Tile *> ys;
         for (int y = 0; y <= height; y++) {
             std::uniform_int_distribution<int> distribution(0,1);
-            //std::cout << "Tile [" << x << "][" << y << "] is ";
             std::random_device rd;
             std::default_random_engine generator(rd());
             int g = distribution(generator);

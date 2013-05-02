@@ -15,8 +15,6 @@ class WorldBuilder
         WorldBuilder* randomizeTiles();
         WorldBuilder* smooth(int);
 
-        // RNGs
-        std::default_random_engine generator;
     public:
         WorldBuilder(int, int);
         World* build();
