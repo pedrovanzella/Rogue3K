@@ -12,6 +12,7 @@ ApplicationMain::~ApplicationMain()
 {
     std::cout << "Cleaning up..." << std::endl;
     delete gameScreen;
+    Renderer::CloseRenderer();
 }
 
 int ApplicationMain::Init()

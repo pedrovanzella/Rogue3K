@@ -15,7 +15,6 @@ GameScreen::GameScreen()
 GameScreen::~GameScreen()
 {
     std::cout << "Cleaning up GameScreen" << std::endl;
-    Renderer::CloseRenderer();
 }
 
 int GameScreen::Update()
