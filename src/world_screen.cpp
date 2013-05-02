@@ -54,7 +54,7 @@ GameScreen* WorldScreen::respondToUserInput(SDL_Event& event)
 
 void WorldScreen::createWorld()
 {
-    WorldBuilder* worldbuilder = new WorldBuilder(90, 31);
+    WorldBuilder* worldbuilder = new WorldBuilder(80, 51);
     worldbuilder = worldbuilder->makeCaves();
     WorldScreen::world = worldbuilder->build();
     delete worldbuilder;
