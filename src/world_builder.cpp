@@ -28,15 +28,12 @@ WorldBuilder* WorldBuilder::randomizeTiles()
             std::random_device rd;
             std::default_random_engine generator(rd());
             int g = distribution(generator);
-            //std::cout << "[" << g << "] ";
             switch (g) {
                 case 0:
                     ys.push_back(Tile::Floor());
-                    //std::cout << "Floor" << std::endl;
                     break;
                 case 1:
                     ys.push_back(Tile::Wall());
-                    //std::cout << "Wall" << std::endl;
                     break;
             }
         }
@@ -47,10 +44,41 @@ WorldBuilder* WorldBuilder::randomizeTiles()
 
 WorldBuilder* WorldBuilder::smooth(int times)
 {
+    std::cout << "Smoothing world" << std::endl;
+    std::vector<std::vector<Tile*>> tiles2;
+    vector<Tile*> ys;
+    for (int i = 0; i < times; i++) {
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                int floors = 0;
+                int rocks = 0;
+
+                for (int ox = -1; ox < 2; ox++) {
+                    for (int oy = -1; oy < 2; oy++) {
+                        if (x + ox < 0 || x + ox >= width || y + oy < 0 || y + oy >= height) {
+                            continue;
+                        }
+                        if (tiles[x + ox][y + oy]->type() == TILE_TYPE_FLOOR) {
+                            floors++;
+                        } else {
+                            rocks++;
+                        }
+                    }
+                }
+                if (floors >= rocks) {
+                    ys.push_back(Tile::Floor());
+                } else {
+                    ys.push_back(Tile::Wall());
+                }
+            }
+            tiles2.push_back(ys);
+        }
+        tiles = tiles2;
+    }
     return this;
 }
 
 WorldBuilder* WorldBuilder::makeCaves()
 {
-    return randomizeTiles()->smooth(8);
+    return randomizeTiles()->smooth(0);
 }
