@@ -80,5 +80,17 @@ WorldBuilder* WorldBuilder::smooth(int times)
 
 WorldBuilder* WorldBuilder::makeCaves()
 {
-    return randomizeTiles()->smooth(0);
+    return fillWithEarth();
+}
+
+WorldBuilder* WorldBuilder::fillWithEarth()
+{
+    for (int x = 0; x < width; x++) {
+        vector<Tile*> ys;
+        for (int y = 0; y < height; y++) {
+            ys.push_back(Tile::Wall());
+        }
+        tiles.push_back(ys);
+    }
+    return this;
 }

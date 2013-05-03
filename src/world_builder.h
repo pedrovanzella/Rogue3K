@@ -12,8 +12,12 @@ class WorldBuilder
         int width;
         int height;
 
+        // For cellular automata
         WorldBuilder* randomizeTiles();
         WorldBuilder* smooth(int);
+
+        // For rooms
+        WorldBuilder* fillWithEarth();
 
     public:
         WorldBuilder(int, int);
