@@ -81,7 +81,48 @@ WorldBuilder* WorldBuilder::smooth(int times)
 
 WorldBuilder* WorldBuilder::makeCaves()
 {
-    return fillWithEarth()->makeRoom(20, 20, 10, 20)->makeRoom(40, 10, 5, 5)->joinRooms(20, 20, 10, 20, 40, 10, 5, 5);
+    std::random_device rd;
+    std::default_random_engine generator(rd());
+
+    std::uniform_int_distribution<int> width_distribution(6, 11);
+    std::uniform_int_distribution<int> height_distribution(6, 11);
+    std::uniform_int_distribution<int> x_distribution(0, width);
+    std::uniform_int_distribution<int> y_distribution(0, height);
+
+    std::uniform_int_distribution<int> room_num_distribution(5, 17);
+
+    // Start with walls all around
+    fillWithEarth();
+
+    // Draw a first room
+    int x = x_distribution(generator);
+    int w = width_distribution(generator);
+    int y = y_distribution(generator);
+    int h = height_distribution(generator);
+
+    makeRoom(x, y, w, h);
+
+    for (int i = 0; i <= room_num_distribution(generator); i++) {
+        int nx = x_distribution(generator);
+        int nw = width_distribution(generator);
+        int ny = y_distribution(generator);
+        int nh = height_distribution(generator);
+
+        makeRoom(nx, ny, nw, nh);
+
+        joinRooms(x, y, w, h, nx, ny, nw, nh);
+
+        std::bernoulli_distribution chance(0.7);
+
+        if (chance(generator)) {
+            x = nx;
+            y = ny;
+            w = nw;
+            h = nh;
+        }
+    }
+
+    return this;
 }
 
 WorldBuilder* WorldBuilder::fillWithEarth()
@@ -98,6 +139,14 @@ WorldBuilder* WorldBuilder::fillWithEarth()
 
 WorldBuilder* WorldBuilder::makeRoom(int x, int y, int w, int h)
 {
+    /* Make sure we don't go off borders */
+    if (x + w > width) {
+        w = width - x;
+    }
+    if (y + h > height) {
+        h = height - y;
+    }
+
     for (int i = x; i < x + w; i++) {
         for (int j = y; j < y + h; j++) {
             tiles[i][j] = Tile::Floor();
