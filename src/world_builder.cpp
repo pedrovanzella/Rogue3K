@@ -123,6 +123,7 @@ WorldBuilder* WorldBuilder::joinRooms(int xa, int ya, int wa, int ha, int xb, in
     std::uniform_int_distribution<int> distribution_for_yb(yb, yb + hb);
     int rcby = distribution_for_yb(generator);
 
+    std::cout << "[" << rcax << ", " << rcay << "] -> [" << rcbx << ", " << rcby << "]" << std::endl;
     /* Draw a corridor */
     std::uniform_int_distribution<int> dist(0, 1);
     switch(dist(generator)) {
