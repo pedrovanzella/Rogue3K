@@ -2,6 +2,7 @@
 #include <vector>
 #include <random>
 #include <iostream>
+#include <algorithm>
 #include "tile.h"
 #include "world.h"
 
@@ -80,7 +81,7 @@ WorldBuilder* WorldBuilder::smooth(int times)
 
 WorldBuilder* WorldBuilder::makeCaves()
 {
-    return fillWithEarth()->makeRoom(20, 20, 10, 20)->joinRooms(1, 2, 3, 4, 10, 20, 30, 40);
+    return fillWithEarth()->makeRoom(20, 20, 10, 20)->makeRoom(40, 10, 5, 5)->joinRooms(20, 20, 10, 20, 40, 10, 5, 5);
 }
 
 WorldBuilder* WorldBuilder::fillWithEarth()
@@ -111,38 +112,42 @@ WorldBuilder* WorldBuilder::joinRooms(int xa, int ya, int wa, int ha, int xb, in
     std::default_random_engine generator(rd());
 
     /* Randomly select points inside both rooms */
-    std::uniform_int_distribution<int> distribution_for_xa(xa, xa + wa);
+    std::uniform_int_distribution<int> distribution_for_xa(xa, xa + wa - 1);
     int rcax = distribution_for_xa(generator);
 
-    std::uniform_int_distribution<int> distribution_for_ya(ya, ya + ha);
+    std::uniform_int_distribution<int> distribution_for_ya(ya, ya + ha - 1);
     int rcay = distribution_for_ya(generator);
 
-    std::uniform_int_distribution<int> distribution_for_xb(xb, xb + wb);
+    std::uniform_int_distribution<int> distribution_for_xb(xb, xb + wb - 1);
     int rcbx = distribution_for_xb(generator);
 
-    std::uniform_int_distribution<int> distribution_for_yb(yb, yb + hb);
+    std::uniform_int_distribution<int> distribution_for_yb(yb, yb + hb - 1);
     int rcby = distribution_for_yb(generator);
 
     std::cout << "[" << rcax << ", " << rcay << "] -> [" << rcbx << ", " << rcby << "]" << std::endl;
     /* Draw a corridor */
+    int max_x = std::max(rcax, rcbx);
+    int max_y = std::max(rcay, rcby);
+    int min_x = std::min(rcax, rcbx);
+    int min_y = std::min(rcay, rcby);
     std::uniform_int_distribution<int> dist(0, 1);
     switch(dist(generator)) {
         case 0:
             /* Half the time, draw vertical then horizontal */
-            for (int i = rcay; i < rcby; i++) {
-                tiles[rcax][i] = Tile::Floor();
+            for (int i = min_y; i <= max_y; i++) {
+                tiles[min_x][i] = Tile::Floor();
             }
-            for (int j = rcax; j < rcbx; j++) {
-                tiles[j][rcby] = Tile::Floor();
+            for (int j = min_x; j <= max_x; j++) {
+                tiles[j][min_y] = Tile::Floor();
             }
             break;
         case 1:
             /* Half the time, draw horizontal then vertical */
-            for (int j = rcax; j < rcbx; j++) {
-                tiles[j][rcay] = Tile::Floor();
+            for (int j = min_x; j <= max_x; j++) {
+                tiles[j][max_y] = Tile::Floor();
             }
-            for (int i = rcay; i < rcby; i++) {
-                tiles[rcbx][i] = Tile::Floor();
+            for (int i = min_y; i <= max_y; i++) {
+                tiles[max_x][i] = Tile::Floor();
             }
             break;
     }
