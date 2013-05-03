@@ -18,6 +18,8 @@ class WorldBuilder
 
         // For rooms
         WorldBuilder* fillWithEarth();
+        WorldBuilder* makeRoom(int, int, int, int);
+        WorldBuilder* joinRooms(int, int, int, int, int, int, int, int);
 
     public:
         WorldBuilder(int, int);
