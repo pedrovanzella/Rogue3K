@@ -115,14 +115,19 @@ WorldBuilder* WorldBuilder::makeCaves()
 
         joinRooms(x, y, w, h, nx, ny, nw, nh);
 
-        std::bernoulli_distribution chance(0.7);
+        std::bernoulli_distribution chance(0.5);
 
-        //if (chance(generator)) {
+        if (chance(generator)) {
+            std::cout << "Continuing from newly created room" << std::endl;
             x = nx;
             y = ny;
             w = nw;
             h = nh;
-        //}
+            std::cout << "\t (" << x << ", " << y << ") -> (" << x + w << ", " << y + h << ")" << std::endl;
+        } else {
+            std::cout << "Continuing from old room" << std::endl;
+            std::cout << "\t (" << x << ", " << y << ") -> (" << x + w << ", " << y + h << ")" << std::endl;
+        }
     }
 
     return this;
@@ -146,6 +151,7 @@ WorldBuilder* WorldBuilder::makeRoom(int x, int y, int w, int h)
     if (isThereARoomHere(x, y, w, h)) {
         return NULL;
     }
+    std::cout << "Making a room in (" << x << ", " << y << ") -> (" << x + w << ", " << y + h << ")" << std::endl;
     for (int i = x; i < x + w; i++) {
         for (int j = y; j < y + h; j++) {
             tiles[i][j] = Tile::Floor();
@@ -156,12 +162,12 @@ WorldBuilder* WorldBuilder::makeRoom(int x, int y, int w, int h)
 
 bool WorldBuilder::isThereARoomHere(int x, int y, int w, int h)
 {
-    if (x + w > width || y + h > height) {
+    if (x + w >= width || y + h >= height) {
         // Technically not true, I know.
         return true;
     }
-    for (int i = x; i <= x + w; i++) {
-        for (int j = y; j <= y + h; j++) {
+    for (int i = x; i < x + w; i++) {
+        for (int j = y; j < y + h; j++) {
             if (tiles[i][j]->type() == TILE_TYPE_FLOOR) {
                 return true;
             }
@@ -188,7 +194,7 @@ WorldBuilder* WorldBuilder::joinRooms(int xa, int ya, int wa, int ha, int xb, in
     std::uniform_int_distribution<int> distribution_for_yb(yb, yb + hb - 1);
     int rcby = distribution_for_yb(generator);
 
-    std::cout << "[" << rcax << ", " << rcay << "] -> [" << rcbx << ", " << rcby << "]" << std::endl;
+    std::cout << "Connecting: [" << rcax << ", " << rcay << "] -> [" << rcbx << ", " << rcby << "]" << std::endl;
     /* Draw a corridor */
     int max_x = std::max(rcax, rcbx);
     int max_y = std::max(rcay, rcby);
