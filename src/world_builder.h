@@ -20,6 +20,7 @@ class WorldBuilder
         WorldBuilder* fillWithEarth();
         WorldBuilder* makeRoom(int, int, int, int);
         WorldBuilder* joinRooms(int, int, int, int, int, int, int, int);
+        bool isThereARoomHere(int, int, int, int);
 
     public:
         WorldBuilder(int, int);

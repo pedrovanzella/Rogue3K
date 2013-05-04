@@ -108,18 +108,21 @@ WorldBuilder* WorldBuilder::makeCaves()
         int ny = y_distribution(generator);
         int nh = height_distribution(generator);
 
-        makeRoom(nx, ny, nw, nh);
+        if (!makeRoom(nx, ny, nw, nh)) {
+            // If we went off borders
+            continue;
+        }
 
         joinRooms(x, y, w, h, nx, ny, nw, nh);
 
         std::bernoulli_distribution chance(0.7);
 
-        if (chance(generator)) {
+        //if (chance(generator)) {
             x = nx;
             y = ny;
             w = nw;
             h = nh;
-        }
+        //}
     }
 
     return this;
@@ -140,19 +143,31 @@ WorldBuilder* WorldBuilder::fillWithEarth()
 WorldBuilder* WorldBuilder::makeRoom(int x, int y, int w, int h)
 {
     /* Make sure we don't go off borders */
-    if (x + w > width) {
-        w = width - x;
+    if (isThereARoomHere(x, y, w, h)) {
+        return NULL;
     }
-    if (y + h > height) {
-        h = height - y;
-    }
-
     for (int i = x; i < x + w; i++) {
         for (int j = y; j < y + h; j++) {
             tiles[i][j] = Tile::Floor();
         }
     }
     return this;
+}
+
+bool WorldBuilder::isThereARoomHere(int x, int y, int w, int h)
+{
+    if (x + w > width || y + h > height) {
+        // Technically not true, I know.
+        return true;
+    }
+    for (int i = x; i <= x + w; i++) {
+        for (int j = y; j <= y + h; j++) {
+            if (tiles[i][j]->type() == TILE_TYPE_FLOOR) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 WorldBuilder* WorldBuilder::joinRooms(int xa, int ya, int wa, int ha, int xb, int yb, int wb, int hb)
