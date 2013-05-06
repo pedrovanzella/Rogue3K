@@ -200,6 +200,17 @@ WorldBuilder* WorldBuilder::joinRooms(int xa, int ya, int wa, int ha, int xb, in
     int max_y = std::max(rcay, rcby);
     int min_x = std::min(rcax, rcbx);
     int min_y = std::min(rcay, rcby);
+
+    int new_axis_min;
+    int new_axis_max;
+    if (rcax < rcbx && rcay < rcby) {
+        new_axis_min = max_y;
+        new_axis_max = min_y;
+    } else {
+        new_axis_min = min_y;
+        new_axis_max = max_y;
+    }
+
     std::cout << "Connecting: [" << min_x << ", " << min_y << "] -> [" << max_x << ", " << max_y << "]" << std::endl;
 
     std::bernoulli_distribution chance(0.5);
@@ -210,13 +221,13 @@ WorldBuilder* WorldBuilder::joinRooms(int xa, int ya, int wa, int ha, int xb, in
             tiles[min_x][i] = Tile::Floor();
         }
         for (int j = min_x; j <= max_x; j++) {
-            tiles[j][min_y] = Tile::Floor();
+            tiles[j][new_axis_min] = Tile::Floor();
         }
     } else {
         std::cout << "Horizontal -> Vertical" << std::endl;
         /* Half the time, draw horizontal then vertical */
         for (int j = min_x; j <= max_x; j++) {
-            tiles[j][max_y] = Tile::Floor();
+            tiles[j][new_axis_max] = Tile::Floor();
         }
         for (int i = min_y; i <= max_y; i++) {
             tiles[max_x][i] = Tile::Floor();
