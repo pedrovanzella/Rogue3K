@@ -110,6 +110,7 @@ WorldBuilder* WorldBuilder::makeCaves()
 
         if (!makeRoom(nx, ny, nw, nh)) {
             // If we went off borders
+            std::cout << "Invalid room. Retrying." << std::endl;
             continue;
         }
 
@@ -194,12 +195,12 @@ WorldBuilder* WorldBuilder::joinRooms(int xa, int ya, int wa, int ha, int xb, in
     std::uniform_int_distribution<int> distribution_for_yb(yb, yb + hb - 1);
     int rcby = distribution_for_yb(generator);
 
-    std::cout << "Connecting: [" << rcax << ", " << rcay << "] -> [" << rcbx << ", " << rcby << "]" << std::endl;
     /* Draw a corridor */
     int max_x = std::max(rcax, rcbx);
     int max_y = std::max(rcay, rcby);
     int min_x = std::min(rcax, rcbx);
     int min_y = std::min(rcay, rcby);
+    std::cout << "Connecting: [" << min_x << ", " << min_y << "] -> [" << max_x << ", " << max_y << "]" << std::endl;
 
     std::bernoulli_distribution chance(0.5);
     if (chance(generator)) {
