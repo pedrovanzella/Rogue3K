@@ -201,6 +201,14 @@ WorldBuilder* WorldBuilder::joinRooms(int xa, int ya, int wa, int ha, int xb, in
     int min_x = std::min(rcax, rcbx);
     int min_y = std::min(rcay, rcby);
 
+    if (max_x > width) {
+        max_x = width;
+    }
+
+    if (max_y > height) {
+        max_y = height;
+    }
+
     int new_axis_min;
     int new_axis_max;
     if (rcax < rcbx && rcay < rcby) {
