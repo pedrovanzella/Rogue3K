@@ -184,62 +184,44 @@ WorldBuilder* WorldBuilder::joinRooms(int xa, int ya, int wa, int ha, int xb, in
 
     /* Randomly select points inside both rooms */
     std::uniform_int_distribution<int> distribution_for_xa(xa, xa + wa - 1);
-    int rcax = distribution_for_xa(generator);
+    int room_a_x = distribution_for_xa(generator);
 
     std::uniform_int_distribution<int> distribution_for_ya(ya, ya + ha - 1);
-    int rcay = distribution_for_ya(generator);
+    int room_a_y = distribution_for_ya(generator);
 
     std::uniform_int_distribution<int> distribution_for_xb(xb, xb + wb - 1);
-    int rcbx = distribution_for_xb(generator);
+    int room_b_x = distribution_for_xb(generator);
 
     std::uniform_int_distribution<int> distribution_for_yb(yb, yb + hb - 1);
-    int rcby = distribution_for_yb(generator);
+    int room_b_y = distribution_for_yb(generator);
 
     /* Draw a corridor */
-    int max_x = std::max(rcax, rcbx);
-    int max_y = std::max(rcay, rcby);
-    int min_x = std::min(rcax, rcbx);
-    int min_y = std::min(rcay, rcby);
-
-    if (max_x > width) {
-        max_x = width;
-    }
-
-    if (max_y > height) {
-        max_y = height;
-    }
-
-    int new_axis_min;
-    int new_axis_max;
-    if (rcax < rcbx && rcay < rcby) {
-        new_axis_min = max_y;
-        new_axis_max = min_y;
-    } else {
-        new_axis_min = min_y;
-        new_axis_max = max_y;
-    }
-
-    std::cout << "Connecting: [" << min_x << ", " << min_y << "] -> [" << max_x << ", " << max_y << "]" << std::endl;
-
     std::bernoulli_distribution chance(0.5);
     if (chance(generator)) {
         std::cout << "Vertical -> Horizontal" << std::endl;
         /* Half the time, draw vertical then horizontal */
-        for (int i = min_y; i <= max_y; i++) {
-            tiles[min_x][i] = Tile::Floor();
+        if (room_a_y <= room_b_y) {
+            for (int i = room_a_y; i <= room_b_y; i++) {
+                tiles[room_a_x][i] = Tile::Floor();
+            }
+        } else {
+            for (int i = room_b_y; i <= room_a_y; i++) {
+                tiles[room_b_x][i] = Tile::Floor();
+            }
         }
-        for (int j = min_x; j <= max_x; j++) {
-            tiles[j][new_axis_min] = Tile::Floor();
+
+        if (room_a_x <= room_b_x) {
+            for (int j = room_a_x; j <= room_b_x; j++) {
+                tiles[j][room_b_y] = Tile::Floor();
+            }
+        } else {
+            for (int j = room_b_x; j <= room_a_x; j++) {
+                tiles[j][room_a_y] = Tile::Floor();
+            }
         }
     } else {
         std::cout << "Horizontal -> Vertical" << std::endl;
         /* Half the time, draw horizontal then vertical */
-        for (int j = min_x; j <= max_x; j++) {
-            tiles[j][new_axis_max] = Tile::Floor();
-        }
-        for (int i = min_y; i <= max_y; i++) {
-            tiles[max_x][i] = Tile::Floor();
-        }
     }
 
     return this;
