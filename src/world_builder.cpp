@@ -100,7 +100,13 @@ WorldBuilder* WorldBuilder::makeCaves()
     int y = y_distribution(generator);
     int h = height_distribution(generator);
 
-    makeRoom(x, y, w, h);
+    while(!makeRoom(x, y, w, h)) {
+        x = x_distribution(generator);
+        w = width_distribution(generator);
+        y = y_distribution(generator);
+        h = height_distribution(generator);
+        std::cout << "Failed to build first room. Retrying." << std::endl;
+    }
 
     for (int i = 0; i <= room_num_distribution(generator); i++) {
         int nx = x_distribution(generator);
@@ -119,15 +125,10 @@ WorldBuilder* WorldBuilder::makeCaves()
         std::bernoulli_distribution chance(0.5);
 
         if (chance(generator)) {
-            std::cout << "Continuing from newly created room" << std::endl;
             x = nx;
             y = ny;
             w = nw;
             h = nh;
-            std::cout << "\t (" << x << ", " << y << ") -> (" << x + w << ", " << y + h << ")" << std::endl;
-        } else {
-            std::cout << "Continuing from old room" << std::endl;
-            std::cout << "\t (" << x << ", " << y << ") -> (" << x + w << ", " << y + h << ")" << std::endl;
         }
     }
 
@@ -195,12 +196,15 @@ WorldBuilder* WorldBuilder::joinRooms(int xa, int ya, int wa, int ha, int xb, in
     std::uniform_int_distribution<int> distribution_for_yb(yb, yb + hb - 1);
     int room_b_y = distribution_for_yb(generator);
 
+    std::cout << std::endl << "[=] Connecting:\t\tA(" << room_a_x << ", " << room_a_y << ");\tB(" << room_b_x << ", " << room_b_y << ")" << std::endl;
+
     /* Draw a corridor */
     std::bernoulli_distribution chance(0.5);
-    if (chance(generator)) {
+    //if (chance(generator)) {
+    if (true) {
         std::cout << "Vertical -> Horizontal" << std::endl;
         /* Half the time, draw vertical then horizontal */
-        if (room_a_y <= room_b_y) {
+        if (room_a_y < room_b_y) {
             for (int i = room_a_y; i <= room_b_y; i++) {
                 tiles[room_a_x][i] = Tile::Floor();
             }
@@ -210,7 +214,7 @@ WorldBuilder* WorldBuilder::joinRooms(int xa, int ya, int wa, int ha, int xb, in
             }
         }
 
-        if (room_a_x <= room_b_x) {
+        if (room_a_x < room_b_x) {
             for (int j = room_a_x; j <= room_b_x; j++) {
                 tiles[j][room_b_y] = Tile::Floor();
             }
