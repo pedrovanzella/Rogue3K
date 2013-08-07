@@ -204,23 +204,44 @@ WorldBuilder* WorldBuilder::joinRooms(int xa, int ya, int wa, int ha, int xb, in
     if (true) {
         std::cout << "Vertical -> Horizontal" << std::endl;
         /* Half the time, draw vertical then horizontal */
-        if (room_a_y < room_b_y) {
-            for (int i = room_a_y; i <= room_b_y; i++) {
-                tiles[room_a_x][i] = Tile::Floor();
+
+        /* Case 1 */
+        if (xa <= xb && ya <= yb) {
+            for (int i = room_a_x; i <= room_b_x; i++) {
+                tiles[i][room_a_y] = Tile::Floor();
             }
-        } else {
-            for (int i = room_b_y; i <= room_a_y; i++) {
-                tiles[room_b_x][i] = Tile::Floor();
+            for (int j = room_a_y; j <= room_b_y; j++) {
+                tiles[room_b_x][j] = Tile::Floor();
             }
         }
 
-        if (room_a_x < room_b_x) {
-            for (int j = room_a_x; j <= room_b_x; j++) {
-                tiles[j][room_b_y] = Tile::Floor();
+        /* Case 2 */
+        if (xa <= xb && ya >= yb) {
+            for (int i = room_a_x; i <= room_b_x; i++) {
+                tiles[i][room_a_y] = Tile::Floor();
             }
-        } else {
-            for (int j = room_b_x; j <= room_a_x; j++) {
-                tiles[j][room_a_y] = Tile::Floor();
+            for (int j = room_b_y; j <= room_a_y; j++) {
+                tiles[room_b_x][j] = Tile::Floor();
+            }
+        }
+
+        /* Case 3 */
+        if (xa >= xb && ya <= yb) {
+            for (int i = room_b_x; i <= room_a_x; i++) {
+                tiles[i][room_a_y] = Tile::Floor();
+            }
+            for (int j = room_a_y; j <= room_b_y; j++) {
+                tiles[room_b_x][j] = Tile::Floor();
+            }
+        }
+
+        /* Case 4 */
+        if (xa >= xb && ya >= yb) {
+            for (int i = room_b_x; i <= room_a_x; i++) {
+                tiles[i][room_a_y] = Tile::Floor();
+            }
+            for (int j = room_b_y; j <= room_a_y; j++) {
+                tiles[room_b_x][j] = Tile::Floor();
             }
         }
     } else {
