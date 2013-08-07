@@ -200,13 +200,13 @@ WorldBuilder* WorldBuilder::joinRooms(int xa, int ya, int wa, int ha, int xb, in
 
     /* Draw a corridor */
     std::bernoulli_distribution chance(0.5);
-    //if (chance(generator)) {
-    if (true) {
+    if (chance(generator)) {
         std::cout << "Vertical -> Horizontal" << std::endl;
         /* Half the time, draw vertical then horizontal */
 
         /* Case 1 */
         if (xa <= xb && ya <= yb) {
+            std::cout << "Case 1" << std::endl;
             for (int i = room_a_x; i <= room_b_x; i++) {
                 tiles[i][room_a_y] = Tile::Floor();
             }
@@ -217,6 +217,7 @@ WorldBuilder* WorldBuilder::joinRooms(int xa, int ya, int wa, int ha, int xb, in
 
         /* Case 2 */
         if (xa <= xb && ya >= yb) {
+            std::cout << "Case 2" << std::endl;
             for (int i = room_a_x; i <= room_b_x; i++) {
                 tiles[i][room_a_y] = Tile::Floor();
             }
@@ -227,6 +228,7 @@ WorldBuilder* WorldBuilder::joinRooms(int xa, int ya, int wa, int ha, int xb, in
 
         /* Case 3 */
         if (xa >= xb && ya <= yb) {
+            std::cout << "Case 3" << std::endl;
             for (int i = room_b_x; i <= room_a_x; i++) {
                 tiles[i][room_a_y] = Tile::Floor();
             }
@@ -237,6 +239,7 @@ WorldBuilder* WorldBuilder::joinRooms(int xa, int ya, int wa, int ha, int xb, in
 
         /* Case 4 */
         if (xa >= xb && ya >= yb) {
+            std::cout << "Case 4" << std::endl;
             for (int i = room_b_x; i <= room_a_x; i++) {
                 tiles[i][room_a_y] = Tile::Floor();
             }
@@ -247,6 +250,50 @@ WorldBuilder* WorldBuilder::joinRooms(int xa, int ya, int wa, int ha, int xb, in
     } else {
         std::cout << "Horizontal -> Vertical" << std::endl;
         /* Half the time, draw horizontal then vertical */
+
+        /* Case 1 */
+        if (xa <= xb && ya <= yb) {
+            std::cout << "Case 1" << std::endl;
+            for (int j = room_a_y; j <= room_b_y; j++) {
+                tiles[room_a_x][j] = Tile::Floor();
+            }
+            for (int i = room_a_x; i <= room_b_x; i++) {
+                tiles[i][room_b_y] = Tile::Floor();
+            }
+        }
+
+        /* Case 2 */
+        if (xa <= xb && ya >= yb) {
+            std::cout << "Case 2" << std::endl;
+            for (int j = room_b_y; j <= room_a_y; j++) {
+                tiles[room_a_x][j] = Tile::Floor();
+            }
+            for (int i = room_a_x; i <= room_b_x; i++) {
+                tiles[i][room_b_y] = Tile::Floor();
+            }
+        }
+
+        /* Case 3 */
+        if (xa >= xb && ya <= yb) {
+            std::cout << "Case 3" << std::endl;
+            for (int j = room_a_y; j <= room_b_y; j++) {
+                tiles[room_a_x][j] = Tile::Floor();
+            }
+            for (int i = room_b_x; i <= room_a_x; i++) {
+                tiles[i][room_b_y] = Tile::Floor();
+            }
+        }
+
+        /* Case 4 */
+        if (xa >= xb && ya >= yb) {
+            std::cout << "Case 4" << std::endl;
+            for (int j = room_b_y; j <= room_a_y; j++) {
+                tiles[room_a_x][j] = Tile::Floor();
+            }
+            for (int i = room_b_x; i <= room_a_x; i++) {
+                tiles[i][room_b_y] = Tile::Floor();
+            }
+        }
     }
 
     return this;
